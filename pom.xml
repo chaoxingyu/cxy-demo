@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 坐标、版本以及打包方式 -->
+	<groupId>cxy-demo</groupId>
+	<artifactId>cxy-demo</artifactId>
+	<version>1.0.0</version>
+	<modules>
+		<module>commons-lib</module>
+	</modules>
+	<packaging>pom</packaging>
+	
+	<name>cxy-demo</name>
+	<description>cxy-demo-parent</description>
+
+	<!-- maven属性的使用 -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<pluginEncoding>UTF-8</pluginEncoding>
+		<maven.test.skip>true</maven.test.skip>
+		<profile.local>src/profile/local</profile.local>
+		<profile.dev>src/profile/dev</profile.dev>
+		<profile.uat>src/profile/uat</profile.uat>
+		<profile.prod>src/profile/prod</profile.prod>
+	</properties>
+
+	<!-- 注意体会插件配置的顺序，这正体现了一个maven的运行流程 -->
+	<build>
+		<plugins>
+			<!-- 清理插件 -->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<!-- 忽略错误 默认为true， -->
+					<failOnError>true</failOnError>
+					<!-- skip 跳过clean阶段 默认为false -->
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+			<!--  maven-resources-plugin 资源插件 -->
+
+			<!-- 编译插件的使用 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<!-- 源代码使用的jdk版本 -->
+					<source>${java.version}</source>
+					<!-- 构建后生成class文件jdk版本 -->
+					<target>${java.version}</target>
+					<encoding>${pluginEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<!-- maven-surefire-plugin 单元测试插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.0</version>
+				<configuration>
+					<!-- 跳过测试阶段 -->
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<!-- war包插件 建议配置编码格式和打包名称 -->
+
+			<!-- maven-install-plugin插件一般不需要配置 -->
+
+			<!-- 部署插件 -->
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.2.2</version>
+					<configuration>
+						<encoding>${pluginEncoding}</encoding>
+						<warSourceDirectory>WebContent</warSourceDirectory>
+						<webXml>WebContent/WEB-INF/web.xml</webXml>
+						<packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+						<!-- 要替换的生产配置文件 -->
+						<webResources>
+							<resource>
+								<filtering>true</filtering>
+								<directory>${profile.directory}</directory>
+								<targetPath>WEB-INF</targetPath>
+								<includes>
+									<include>**</include>
+								</includes>
+							</resource>
+						</webResources>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>	
+	
+	<profiles>
+		<!-- prod配置 -->
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profile.directory>${profile.prod}</profile.directory>
+			</properties>
+		</profile>
+		<!-- uat配置 -->
+		<profile>
+			<id>uat</id>
+			<properties>
+				<profile.directory>${profile.uat}</profile.directory>
+			</properties>
+		</profile>
+		<!-- dev配置 -->
+		<profile>
+			<id>dev</id>
+			<properties>
+				<profile.directory>${profile.dev}</profile.directory>
+			</properties>
+		</profile>
+		<!-- local配置 -->
+		<profile>
+			<id>local</id>
+			<properties>
+				<profile.directory>${profile.local}</profile.directory>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>	
+	
+</project>
