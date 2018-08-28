@@ -19,6 +19,26 @@
         <log4j2.version>2.11.1</log4j2.version>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <!--
+                    <compilerArguments>
+                        <verbose/>
+                        <bootclasspath>${JAVA_HOME}/jre/lib/rt.jar</bootclasspath>
+                    </compilerArguments>
+                    -->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
 
         <!-- 日志依赖处理 start-->
@@ -65,6 +85,60 @@
             <artifactId>dom4j</artifactId>
             <version>2.1.1</version>
         </dependency>
+        <!-- JSON解析 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.49</version>
+        </dependency>
+
+        <!-- 数据库  start-->
+        <!-- JDBC datasource -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+        <!-- JDBC driver-->
+        <!-- JDBC Type 4 driver for MySQL Server 8.0, 5.7, 5.6, and 5.5 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.12</version>
+        </dependency>
+        <!-- JDBC Type 4 driver for all MariaDB servers and MySQL Server 8.0, 5.7, 5.6, and 5.5.3 -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.2.6</version>
+        </dependency>
+        <!-- JDBC Type 4 driver for DB2 Server 11.1 -->
+        <dependency>
+            <groupId>com.ibm.db2.jcc</groupId>
+            <artifactId>db2jcc4</artifactId>
+            <version>11.1</version>
+        </dependency>
+        <!-- JDBC Type 3 driver for DB2 Server 11.1
+        <dependency>
+            <groupId>com.ibm.db2.jcc</groupId>
+            <artifactId>db2jcc</artifactId>
+            <version>11.1</version>
+        </dependency>
+        -->
+        <!-- JDBC  driver for Oracle Database 18.3 -->
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>18.3</version>
+        </dependency>
+        <!-- JDBC  for h2 Database  -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.197</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- 数据库  end-->
 
         <!-- 测试-->
         <dependency>
@@ -74,24 +148,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <!--
-                    <compilerArguments>
-                        <verbose/>
-                        <bootclasspath>${JAVA_HOME}/jre/lib/rt.jar</bootclasspath>
-                    </compilerArguments>
-                    -->
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

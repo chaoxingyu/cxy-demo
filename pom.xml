@@ -2,21 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
 
-	<!-- 坐标、版本以及打包方式 -->
+	<!-- 参考： https://yq.aliyun.com/articles/38271 -->
+	<!-- 基本设置   Start -->
+	<!-- 模型版本 -->
+	<modelVersion>4.0.0</modelVersion>
+	<!-- 公司或者组织的唯一标志，并且配置时生成的路径也是由此生成 -->
 	<groupId>cxy-demo</groupId>
+	<!-- 本项目的唯一ID，一个groupId下面可能多个项目，就是靠artifactId来区分的 -->
 	<artifactId>cxy-demo</artifactId>
+	<!-- 本项目目前所处的版本号 -->
 	<version>1.0.0</version>
+	<!-- 打包的机制，如pom,jar, maven-plugin, ejb, war, ear, rar, par，默认为jar -->
+	<packaging>pom</packaging>
+
 	<modules>
 		<module>commons-lib</module>
 	</modules>
-	<packaging>pom</packaging>
-	
-	<name>cxy-demo</name>
-	<description>cxy-demo-parent</description>
 
-	<!-- maven属性的使用 -->
+
+
+
+	<!-- maven属性 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -29,6 +36,14 @@
 		<profile.prod>src/profile/prod</profile.prod>
 	</properties>
 
+	<!-- 基本设置   end -->
+
+	<!-- 项目信息设置 Start -->
+	<name>cxy-demo</name>
+	<description>cxy-demo-parent</description>
+	<!-- 项目信息设置 end -->
+
+	<!-- 构建过程的设置 Start -->
 	<!-- 注意体会插件配置的顺序，这正体现了一个maven的运行流程 -->
 	<build>
 		<plugins>
@@ -113,8 +128,11 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-	</build>	
-	
+	</build>
+	<!-- 构建过程的设置 end -->
+
+	<!-- 环境设置 Start -->
+	<!-- profile（项目构建）配置 -->
 	<profiles>
 		<!-- prod配置 -->
 		<profile>
@@ -147,6 +165,20 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 		</profile>
-	</profiles>	
-	
+	</profiles>
+	<!--仓库配置 -->
+	<!--发现依赖和扩展的远程仓库列表 -->
+	<repositories>
+		<!--包含需要连接到远程仓库的信息 -->
+		<repository>
+			<!--远程仓库唯一标识符。 -->
+			<id>nexus-aliyun</id>
+			<!--远程仓库名称 -->
+			<name>Nexus aliyun</name>
+			<!--远程仓库URL，按protocol://hostname/path形式 -->
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+	<!-- 环境设置 end -->
+
 </project>
