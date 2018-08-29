@@ -79,6 +79,18 @@
         </dependency>
         <!-- 日志依赖处理 end-->
 
+        <!-- 解析Excel strat -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <!-- 解析Excel end -->
         <!-- XML解析 -->
         <dependency>
             <groupId>org.dom4j</groupId>
