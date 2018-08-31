@@ -1,6 +1,4 @@
-package cxy.demo
-
--demo;
+package cxy.demo;
 
 import static org.junit.Assert.assertTrue;
 
