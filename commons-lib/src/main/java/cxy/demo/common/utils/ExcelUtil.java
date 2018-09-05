@@ -46,7 +46,7 @@ public class ExcelUtil {
             int sheetCount = workbook.getNumberOfSheets();
             for (int i = 0; i < sheetCount; i++) {
                 Sheet sheet = workbook.getSheetAt(i);
-                parseSheet(date, fileName, sheet, writePath);
+                parseSccbaEsbSheet(date, fileName, sheet, writePath);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,14 +102,14 @@ public class ExcelUtil {
 
 
     /**
-     * 解析表格并写文件
+     * 解析山盟ESB表格并写文件
      *
      * @param date      日期
      * @param fileName  文件名称
      * @param sheet     待解析表格
      * @param writePath 文件写入路径
      */
-    public static void parseSheet(String date, String fileName, Sheet sheet, String writePath) {
+    public static void parseSccbaEsbSheet(String date, String fileName, Sheet sheet, String writePath) {
         // 获取工作表名称
         String sheetName = sheet.getSheetName();
         // 一般第一行为标题行，但解析时其下标为0
@@ -151,10 +151,16 @@ public class ExcelUtil {
         sbf.append("@XmlAccessorType(XmlAccessType.FIELD) ");
         sbf.append(lines);
         String className = sheetName.toUpperCase() + api;
-        sbf.append("public class " + className + " extends EsbBaseRequestBean implements Serializable { ");
+        String extendName = "Request";
+        if (sheetName.toUpperCase().equals(extendName.toUpperCase())) {
+            extendName = "EsbBaseRequestBean";
+        } else {
+            extendName = "EsbBaseResponseBean";
+        }
+        sbf.append("public class " + className + " extends " + extendName + " implements Serializable { ");
         sbf.append(lines);
         sbf.append(lines);
-        sbf.append("private static final long serialVersionUID =  L; ");
+        sbf.append("private static final long serialVersionUID =  1L; ");
         sbf.append(lines);
         sbf.append(lines);
         // 表格第四行开始
