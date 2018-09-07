@@ -7,8 +7,7 @@ import java.net.*;
 
 public class SocketUtil {
 
-    // 日志
-    public static final Logger LOGGER = Logger.getLogger(SocketUtil.class);
+    private static final Logger LOGGER = Logger.getLogger(SocketUtil.class);
 
 
     /**
@@ -52,7 +51,7 @@ public class SocketUtil {
      * @param sendData 发送数据
      * @return 响应数据
      */
-    public static String sendMsgWithTcp(String ip, int port, byte[] sendData) {
+    private static String sendMsgWithTcp(String ip, int port, byte[] sendData) {
         Socket client = null;
         OutputStream os = null;
         InputStream is = null;
@@ -120,7 +119,7 @@ public class SocketUtil {
      * @param sendData 发送数据
      * @return 响应数据
      */
-    public static String sendMsgWithUdp(String ip, int port, byte[] sendData) {
+    private static String sendMsgWithUdp(String ip, int port, byte[] sendData) {
         DatagramSocket mSocket = null;
         try {
             // 1.初始化DatagramSocket
