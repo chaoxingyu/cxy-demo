@@ -79,6 +79,15 @@
         </dependency>
         <!-- 日志依赖处理 end-->
 
+        <!-- SFTP依赖  start -->
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>0.1.54</version>
+        </dependency>
+        <!-- SFTP依赖  end -->
+
+
         <!-- 解析Pdf start -->
         <!-- itextpdf 导出pdf -->
         <dependency>
@@ -172,6 +181,12 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

@@ -11,7 +11,7 @@ public class StringUtil {
 	 * 
 	 * @return String
 	 */
-	public static String getUUid() {
+	public static String getUUID() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 
@@ -45,10 +45,7 @@ public class StringUtil {
 			return true;
 		}
 		str = str.trim();
-		if (str == null || "".equals(str)) {
-			return true;
-		}
-		return false;
+		return "".equals(str);
 	}
 
 	public static boolean afterTrimIsNotNullOrBlock(String str) {
@@ -158,11 +155,11 @@ public class StringUtil {
 		if (list == null || list.isEmpty()) {
 			return "";
 		}
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (Object object : list) {
-			stringBuffer.append(object.toString() + ",");
+			sb.append(object.toString() + ",");
 		}
-		String rs = stringBuffer.toString();
+		String rs = sb.toString();
 		return rs.substring(0, rs.length() - 1);
 	}
 
@@ -177,13 +174,13 @@ public class StringUtil {
 		if (numLen < 1 || numLen > 99) {
 			numLen = 6;
 		}
-		String rs = "";
+		StringBuilder rs = new StringBuilder();
 		for (int i = 0; i < numLen; i++) {
 			Random random = new Random();
 			int randomInt = random.nextInt() % 10;
-			rs += Math.abs(randomInt);
+			rs.append(Math.abs(randomInt)) ;
 		}
-		return rs;
+		return rs.toString();
 	}
 
 }

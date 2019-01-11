@@ -76,6 +76,7 @@ public class CreateEnumsSql {
 			if (out != null)
 				out.close();
 		} catch (IOException ex) {
+
 		}
 	}
 
@@ -97,13 +98,13 @@ public class CreateEnumsSql {
 		File file = new File(dir);
 		if (file.exists()) {
 			return;
-		} else if (file.mkdirs() == false) {
+		} else if (!file.mkdirs()) {
 			throw new IOException("Cannot create directories = " + dir);
 		}
 	}
 
 	public static String getFilePath(String fullFilePath) {
-		if (fullFilePath == null) {
+		if (null  == fullFilePath) {
 			return "";
 		}
 		int index1 = fullFilePath.lastIndexOf('/');
@@ -112,7 +113,6 @@ public class CreateEnumsSql {
 		if (index == -1) {
 			return null;
 		}
-		String filepath = fullFilePath.substring(0, index);
-		return filepath;
+		return fullFilePath.substring(0, index);
 	}
 }
