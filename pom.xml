@@ -18,7 +18,18 @@
 
 	<modules>
 		<module>commons-lib</module>
-	</modules>
+		<module>consul-producer</module>
+		<module>consul-producer2</module>
+		<module>consul-consumer</module>
+		<module>consul-consumer-feign</module>
+		<module>consul-consumer-feign-hystrix</module>
+		<module>config-server-git</module>
+		<module>consul-hystrix-dashboard</module>
+		<module>consul-hystrix-turbine</module>
+		<module>consul-hystrix-turbine-stream</module>
+        <module>spring-cloud-gateway</module>
+        <module>spring-cloud-monitor</module>
+    </modules>
 
 
 

@@ -1,0 +1,17 @@
+
+server:
+    port: 9011
+
+spring:
+    application:
+        name: consul-hystrix-dashboard
+    cloud:
+        consul:
+            host: localhost
+            port: 8500
+            discovery:
+                # 指定注册到consul server上的服务名称
+                serviceName: consul-hystrix-dashboard
+
+
+

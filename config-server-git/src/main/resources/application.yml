@@ -1,0 +1,27 @@
+
+server:
+    port: 7101
+
+spring:
+    application:
+        name: config-server-git
+    cloud:
+        config:
+            server:
+                # 配置git仓库
+                git:
+                    # 地址
+                    uri: https://github.com/zhaoyibo/spring-cloud-study
+                    # git仓库地址下的相对地址，可以配置多个，用,分割
+                    search-paths: git-config
+                    # 访问 Git 仓库的用户名
+                    #username:
+                    # 访问 Git 仓库的用户密码
+                    #password:
+
+
+
+
+
+
+

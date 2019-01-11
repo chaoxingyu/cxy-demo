@@ -1,0 +1,39 @@
+
+server:
+    port: 9102
+
+spring:
+    application:
+        name: service-consul-consumer-feign-hystrix
+    cloud:
+        consul:
+            host: localhost
+            port: 8500
+            discovery:
+                # 指定注册到consul server上的服务名称
+                serviceName: service-consul-consumer-feign-hystrix
+
+feign:
+    hystrix:
+        enabled: true
+
+
+management:
+    endpoints:
+    #Spring Boot 2.0官方文档之 Actuator
+        enabled-by-default: true
+        web:
+            exposure:
+                include: hystrix.stream,health,info
+                #include: refresh,health,info
+                # * 在yaml 文件属于关键字，所以需要加引号
+
+# base-path: /
+
+# 日志配置
+logging:
+    level:
+        org.springframework.cloud.openfeign: debug
+        org.springframework.http.server.reactive: debug
+        org.springframework.web.reactive: debug
+        reactor.ipc.netty: debug

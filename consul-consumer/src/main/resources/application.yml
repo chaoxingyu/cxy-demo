@@ -1,0 +1,23 @@
+
+server:
+    port: 8601
+
+spring:
+    application:
+        name: consul-consumer
+    cloud:
+        consul:
+            host: localhost
+            port: 8500
+            discovery:
+                # 注册到consul的服务名称
+                serviceName: ${spring.application.name}
+
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: hystrix.stream,health,info
+                # * 在yaml 文件属于关键字，所以需要加引号
+

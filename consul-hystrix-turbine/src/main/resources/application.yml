@@ -1,0 +1,38 @@
+
+server:
+    port: 9021
+
+spring:
+    application:
+        name: consul-hystrix-turbine
+    cloud:
+        consul:
+            host: localhost
+            port: 8500
+            discovery:
+                # 注册到consul的服务名称
+                serviceName: ${spring.application.name}
+
+# 集群 以逗号分隔
+applications: service-consul-consumer-feign-hystrix
+
+turbine:
+    # 指定收集路径
+    instanceUrlSuffix: /actuator/hystrix.stream
+    aggregator:
+        # 指定聚合哪些集群，多个使用","分割，默认为default。
+        clusterConfig: default
+        # default 访问地址 http://ip:port/turbine.stream/
+        # 其他 访问地址 http://ip:port/turbine.stream?cluster={clusterConfig之一}
+    # 指定了需要收集监控信息的服务名；以逗号分隔
+    appConfig: ${applications}
+    # 1. clusterNameExpression指定集群名称，默认表达式appName；此时：turbine.aggregator.clusterConfig需要配置想要监控的应用名称
+    # 2. 当clusterNameExpression: default时，turbine.aggregator.clusterConfig可以不写，因为默认就是default
+    # 3. 当clusterNameExpression: metadata['cluster']时，假设想要监控的应用配置了eureka.instance.metadata-map.cluster: ABC，则需要配置，同时turbine.aggregator.clusterConfig: ABC
+    cluster-name-expression: "'default'"  # "'default'"  ==  new String("default")
+    # combine-host-port默认为false，则服务是以host进行区分，若设置为true则以host+port进行区分
+    combine-host-port: true
+
+
+
+
