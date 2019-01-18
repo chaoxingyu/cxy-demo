@@ -1,12 +1,12 @@
 
 server:
-  port: 10000
+  port: 9101
   #servlet:
       #context-path: /gatewayApi
 
 spring:
   application:
-    name: spring-cloud-gateway
+    name: consul-gateway
   # 网关路由配置方式
   cloud:
     gateway:
@@ -17,9 +17,9 @@ spring:
           enabled: true
           #路由访问方式：http://Gateway_HOST:Gateway_PORT/serviceId/**。
         routes:
-          - id: service-producer
+          - id: consul-provider
             # 重点！必须使用http进行转发，lb代表从注册中心获取服务
-            uri: lb://service-producer
+            uri: lb://service-consul-provider
             # 重点！转发该路径！,/userapi/**,
             order: 100
             predicates:
@@ -28,11 +28,27 @@ spring:
             filters:
             #- StripPrefix= 1  #去掉 转发路径 前缀的非负整数（对应）层数
             #- SetPath=/
-          - id: spring-cloud-consul-consumer
-            uri: lb://service-consumer
+          - id: consul-consumer
+            uri: lb://service-consul-consumer
             order: 101
             predicates:
-              - Path= /service-consumer/**
+              - Path= /service-consul-consumer/**
+            filters:
+              - StripPrefix= 1
+              #- SetPath=/
+          - id: consul-consumer-feign
+            uri: lb://service-consul-consumer-feign
+            order: 101
+            predicates:
+              - Path= /service-consul-consumer-feign/**
+            filters:
+              - StripPrefix= 1
+              #- SetPath=/
+          - id: consul-consumer-feign-hystrix
+            uri: lb://service-consul-consumer-feign-hystrix
+            order: 101
+            predicates:
+              - Path= /service-consul-consumer-feign-hystrix/**
             filters:
               - StripPrefix= 1
               #- SetPath=/

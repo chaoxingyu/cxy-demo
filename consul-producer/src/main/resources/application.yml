@@ -1,18 +1,18 @@
 
 server:
-    port: 8501
+    port: 8701
     servlet:
         context-path: /cloudApi
 
 spring:
     application:
-        name: spring-cloud-consul-producer
+        name: consul-provider
     cloud:
         consul:
             host: localhost
             port: 8500
             discovery:
-                serviceName: service-producer
+                serviceName: service-consul-provider
                 healthCheckPath: /cloudApi/actuator/health
                 healthCheckInterval: 15s
 

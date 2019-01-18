@@ -11,7 +11,8 @@ spring:
             port: 8500
             discovery:
                 # 注册到consul的服务名称
-                serviceName: ${spring.application.name}
+                #serviceName: ${spring.application.name}
+                serviceName: service-consul-consumer
 
 
 management:

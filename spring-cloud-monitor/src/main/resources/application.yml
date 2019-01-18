@@ -1,6 +1,6 @@
 
 server:
-    port: 8701
+    port: 9041
 
 spring:
     application:

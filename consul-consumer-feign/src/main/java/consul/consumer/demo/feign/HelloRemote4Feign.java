@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Date 2019-01-08 13:49
  * @Version 1.0
  */
-@FeignClient(name = "service-producer")
+@FeignClient(name = "service-consul-provider")
 public interface HelloRemote4Feign {
 
     @RequestMapping(value = "/cloudApi/helloFeign")

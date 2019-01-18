@@ -1,4 +1,4 @@
-package demo.gatew;
+package consul.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class SpringCloudGateWayApplication {
+public class ConsulGateWayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringCloudGateWayApplication.class, args);
+		SpringApplication.run(ConsulGateWayApplication.class, args);
 	}
 
 }

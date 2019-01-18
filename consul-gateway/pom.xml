@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-cloud-gateway</artifactId>
-    <name>spring-cloud-gateway</name>
-    <description>Consul Demo project for Spring Cloud </description>
+    <artifactId>consul-gateway</artifactId>
+    <name>consul-gateway</name>
+    <description>Consul project for Spring Cloud </description>
     <packaging>jar</packaging>
 
     <properties>

@@ -1,10 +1,10 @@
 
 server:
-    port: 9101
+    port: 8611
 
 spring:
     application:
-        name: service-consul-consumer-feign
+        name: consul-consumer-feign
     cloud:
         consul:
             host: localhost
