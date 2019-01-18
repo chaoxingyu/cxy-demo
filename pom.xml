@@ -27,7 +27,7 @@
 		<module>consul-hystrix-dashboard</module>
 		<module>consul-hystrix-turbine</module>
 		<module>consul-hystrix-turbine-stream</module>
-        <module>spring-cloud-gateway</module>
+        <module>consul-gateway</module>
         <module>spring-cloud-monitor</module>
     </modules>
 
