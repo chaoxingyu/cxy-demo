@@ -6,8 +6,17 @@ import cxy.demo.common.enums.interfaces.Description;
 @Description("enum例子")
 public enum A_Example {
 
+    /*
+     * a
+     */
     a("a", "name", "value", "desc"),
+    /*
+     * b
+     */
     b("b", "name1", "value1", "desc1"),
+    /*
+     * c
+     */
     c("c", "name2", "value2", "desc2");
 
     // 成员变量
@@ -27,32 +36,16 @@ public enum A_Example {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getValue() {
         return value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
     public String getDesc() {
         return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     @Override
@@ -68,7 +61,7 @@ public enum A_Example {
      */
     public static String getNameByCode(String code) {
         for (A_Example c : A_Example.values()) {
-            if (c.getCode() == code) {
+            if (c.getCode().equals(code)) {
                 return c.name;
             }
         }
@@ -83,7 +76,7 @@ public enum A_Example {
      */
     public static String getNameByValue(String value) {
         for (A_Example c : A_Example.values()) {
-            if (c.getValue() == value) {
+            if (c.getValue().equals(value)) {
                 return c.name;
             }
         }
@@ -98,7 +91,7 @@ public enum A_Example {
      */
     public static A_Example getEnumTypeByCode(String code) {
         for (A_Example c : A_Example.values()) {
-            if (c.getCode() == code) {
+            if (c.getCode().equals(code)) {
                 return c;
             }
         }
@@ -113,7 +106,7 @@ public enum A_Example {
      */
     public static A_Example getEnumTypeByName(String name) {
         for (A_Example c : A_Example.values()) {
-            if (c.getName() == name) {
+            if (c.getName().equals(name)) {
                 return c;
             }
         }
@@ -128,7 +121,7 @@ public enum A_Example {
      */
     public static A_Example getEnumTypeByValue(String value) {
         for (A_Example c : A_Example.values()) {
-            if (c.getValue() == value) {
+            if (c.getValue().equals(value)) {
                 return c;
             }
         }

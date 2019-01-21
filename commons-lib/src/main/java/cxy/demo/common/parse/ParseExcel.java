@@ -6,6 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -239,7 +240,7 @@ public class ParseExcel {
         System.err.println("文件写入：" + filePath);
         Path path = Paths.get(filePath);
         try {
-            Files.write(path, str.getBytes());
+            Files.write(path, str.getBytes(Charset.defaultCharset()));
         } catch (Exception e) {
             e.printStackTrace();
         }

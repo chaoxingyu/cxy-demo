@@ -1,6 +1,7 @@
 package cxy.demo.common.utils;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -178,7 +179,7 @@ public class FileUtil {
 	 */
 	public static void writeFileByString(String str, String filePath) throws IOException {
 		Path path = getPath4WriteFile(filePath);
-		Files.write(path, str.getBytes());
+		Files.write(path, str.getBytes(Charset.defaultCharset()));
 	}
 
 	/**

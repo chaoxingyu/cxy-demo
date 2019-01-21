@@ -155,19 +155,19 @@ public class ClassRefUtil {
         } else if (bigInteger.equals(type)) {
             return isNullOrEmpty(value) ? null : (BigInteger) value;
         } else if (boolean1.equals(type) || boolean2.equals(type)) {
-            return isNullOrEmpty(value) ? false : (Boolean) value;
+            return isNullOrEmpty(value) ? false : Boolean.parseBoolean(value.toString());
         } else if (int1.equals(type) || int2.equals(type)) {
-            return isNullOrEmpty(value) ? 0 : new Integer(value.toString());
+            return isNullOrEmpty(value) ? 0 : Integer.parseInt(value.toString());
         } else if (float1.equals(type) || float2.equals(type)) {
-            return isNullOrEmpty(value) ? 0f : new Float(value.toString());
+            return isNullOrEmpty(value) ? 0f : Float.parseFloat(value.toString());
         } else if (double1.equals(type) || double2.equals(type)) {
-            return isNullOrEmpty(value) ? 0d : new Double(value.toString());
+            return isNullOrEmpty(value) ? 0d : Double.parseDouble(value.toString());
         } else if (long1.equals(type) || long2.equals(type)) {
-            return isNullOrEmpty(value) ? 0L : new Long(value.toString());
+            return isNullOrEmpty(value) ? 0L : Long.parseLong(value.toString());
         } else if (short1.equals(type) || short2.equals(type)) {
-            return isNullOrEmpty(value) ? 0 : new Short(value.toString());
+            return isNullOrEmpty(value) ? 0 : Short.parseShort(value.toString());
         } else if (byte1.equals(type) || byte2.equals(type)) {
-            return isNullOrEmpty(value) ? 0 : new Byte(value.toString());
+            return isNullOrEmpty(value) ? 0 : Byte.parseByte(value.toString());
         } else {
             return value;
         }

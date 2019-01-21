@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -203,17 +204,18 @@ public class IdCardUtil {
      */
     public String randomBirthday(int year) {
         Calendar birthday = Calendar.getInstance();
+        Random rand = new Random();
         if (1950 > year) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy");
             String nowYear = dateFormat.format(new Date());
             // 年份范围为1950～2010年
             int num = Integer.parseInt(nowYear) - 1950 - 10;
-            birthday.set(Calendar.YEAR, (int) (Math.random() * num) + 1950);
+            birthday.set(Calendar.YEAR, rand.nextInt(num) + 1950);
         } else {
             birthday.set(Calendar.YEAR, year);
         }
-        birthday.set(Calendar.MONTH, (int) (Math.random() * 12));
-        birthday.set(Calendar.DATE, (int) (Math.random() * 31));
+        birthday.set(Calendar.MONTH, rand.nextInt(12));
+        birthday.set(Calendar.DATE, rand.nextInt(28));
 
         StringBuilder builder = new StringBuilder();
         builder.append(birthday.get(Calendar.YEAR));
@@ -236,7 +238,8 @@ public class IdCardUtil {
      * @return
      */
     public String randomCode() {
-        int code = (int) (Math.random() * 1000);
+        Random rand = new Random();
+        int code = rand.nextInt(1000);
         if (code < 10) {
             return "00" + code;
         } else if (code < 100) {

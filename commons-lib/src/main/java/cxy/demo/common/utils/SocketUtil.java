@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.Charset;
 
 public class SocketUtil {
 
@@ -69,7 +70,7 @@ public class SocketUtil {
             client.shutdownOutput();
             // 3.读取服务端消息
             is = client.getInputStream();
-            isr = new InputStreamReader(is);
+            isr = new InputStreamReader(is, Charset.defaultCharset());
             br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
             String line = null;
@@ -134,7 +135,7 @@ public class SocketUtil {
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             // 5.接收服务端消息
             mSocket.receive(receivePacket);
-            return new String(receiveData);
+            return new String(receiveData, Charset.defaultCharset());
         } catch (SocketException e) {
             LOGGER.error("连接主机异常: ", e);
         } catch (IOException e) {

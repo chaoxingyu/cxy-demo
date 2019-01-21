@@ -585,7 +585,13 @@ public class SftpUtil {
      */
     public LinkedList<SftpLsEntry> getAllSftpLsEntry4Dir(String remotePath) throws Exception {
         Path path = Paths.get(remotePath);
-        SftpLsEntry sftpLsEntry = new SftpLsEntry(path.getFileName().toString(), path.getParent().toString(), true, 0l);
+        String fileName = path.getFileName() == null ? "" : path.getFileName().toString();
+        String fileParent = path.getParent() == null ? "" : path.getParent().toString();
+        SftpLsEntry sftpLsEntry = new SftpLsEntry();
+        sftpLsEntry.setDir(true);
+        sftpLsEntry.setFileSize(0L);
+        sftpLsEntry.setFileName(fileName);
+        sftpLsEntry.setPath(fileParent);
         // 保存待遍历文件夹的列表
         LinkedList<SftpLsEntry> dirList = new LinkedList<>();
         // 文件列表
@@ -613,75 +619,4 @@ public class SftpUtil {
         return name1.equals(fileName) || name2.equals(fileName);
     }
 
-
-    public static void main(String[] args) {
-
-
-    }
-
-
-    class SftpLsEntry {
-        /**
-         * 文件名称
-         */
-        private String fileName;
-        /**
-         * 文件父级路径
-         */
-        private String path;
-        /**
-         * 是否为目录
-         */
-        private boolean isDir;
-        /**
-         * 文件大小
-         */
-        private long fileSize;
-
-        public SftpLsEntry(String fileName, String path, boolean isDir, long fileSize) {
-            super();
-            this.fileName = fileName;
-            this.path = path;
-            this.isDir = isDir;
-            this.fileSize = fileSize;
-        }
-
-        protected String getFileName() {
-            return fileName;
-        }
-
-        protected void setFileName(String fileName) {
-            this.fileName = fileName;
-        }
-
-        protected String getPath() {
-            return path;
-        }
-
-        protected void setPath(String path) {
-            this.path = path;
-        }
-
-        protected boolean isDir() {
-            return isDir;
-        }
-
-        protected void setDir(boolean isDir) {
-            this.isDir = isDir;
-        }
-
-        protected long getFileSize() {
-            return fileSize;
-        }
-
-        protected void setFileSize(long fileSize) {
-            this.fileSize = fileSize;
-        }
-
-        @Override
-        public String toString() {
-            return "SftpLsEntry [fileName=" + fileName + ", path=" + path + ", isDir=" + isDir + ", fileSize=" + fileSize + "]";
-        }
-
-    }
 }

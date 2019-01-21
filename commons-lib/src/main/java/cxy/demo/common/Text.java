@@ -80,13 +80,20 @@ public class Text {
 
     private static String changeCharset(String str, String newCharset)
             throws UnsupportedEncodingException {
-        if (str != null) {
-            //用默认字符编码解码字符串。
-            byte[] bs = str.getBytes();
-            //用新的字符编码生成字符串
-            return new String(bs, newCharset);
+        if (null == newCharset || "".equals(newCharset)) {
+            return str;
         }
-        return null;
+        Charset defaultCharset = Charset.defaultCharset();
+        if (defaultCharset == Charset.forName(newCharset)) {
+            return str;
+        }
+        if (null == str || "".equals(str)) {
+            return null;
+        }
+        // 用默认字符编码解码字符串。
+        byte[] bs = str.getBytes(defaultCharset);
+        // 用新的字符编码生成字符串
+        return new String(bs, newCharset);
     }
 
     private static void writeFile(String str, String fileName, String path) {
@@ -146,17 +153,17 @@ public class Text {
         // String line = System.getProperty("line.separator");
         /**
          //dealOpen();
-        String str = "This is a 中文的 String!";
-        System.out.println("str: " + str+" ,length: "+str.length());
-        String gbk = changeCharset(str,"GBK");
-        System.out.println("转换成GBK码: " + gbk+" ,length: "+gbk.length());
-        String idno = "511527198001010011";
-        System.err.println(idno.substring(15,16));
-        System.err.println(idno.substring(16,17));
-        System.err.println(idno.substring(17,18));
-        System.err.println(idno.substring(18));
-        //String str = "$$$$-APPZX0012RES-XXXXXX-YYYYMMDD";
-        */
+         String str = "This is a 中文的 String!";
+         System.out.println("str: " + str+" ,length: "+str.length());
+         String gbk = changeCharset(str,"GBK");
+         System.out.println("转换成GBK码: " + gbk+" ,length: "+gbk.length());
+         String idno = "511527198001010011";
+         System.err.println(idno.substring(15,16));
+         System.err.println(idno.substring(16,17));
+         System.err.println(idno.substring(17,18));
+         System.err.println(idno.substring(18));
+         //String str = "$$$$-APPZX0012RES-XXXXXX-YYYYMMDD";
+         */
         //System.err.println(str.substring(str.indexOf("$$$$-APPZX0012RES-")));
         /*
         String tmt = "110.01";
@@ -201,18 +208,17 @@ public class Text {
     }
 
 
-
-    private static void readFiles(){
+    private static void readFiles() {
         // String originalFilename = "3015-APPZX0012RES-100001-20171224";
         String originalFilename = "3015-TRXRESPN-300001-997774-20171225";
-        File destFile = new File("/Users/chaoxingyu/Downloads/data/"+originalFilename);
+        File destFile = new File("/Users/chaoxingyu/Downloads/data/" + originalFilename);
         FileInputStream fs = null;
         InputStreamReader read = null;
         BufferedReader br = null;
         List<String> list = new ArrayList<>();
         try {
-            fs =new FileInputStream(destFile);
-            read = new InputStreamReader(fs , "GBK");
+            fs = new FileInputStream(destFile);
+            read = new InputStreamReader(fs, "GBK");
             br = new BufferedReader(read);
             String lineTXT = null;
             int line = 1;
@@ -222,7 +228,7 @@ public class Text {
                 // System.err.println("第" + line + "行文件内容: " + lineTXT);
                 line++;
             }
-            System.err.println("总行数："+line);
+            System.err.println("总行数：" + line);
             br.close();
             read.close();
             fs.close();
@@ -230,9 +236,9 @@ public class Text {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (null != br) {
                     br.close();
@@ -248,23 +254,24 @@ public class Text {
             }
         }
         //dealOpen(originalFilename,list);
-        dealTrans(originalFilename,list);
+        dealTrans(originalFilename, list);
 
     }
+
     private static void dealTrans(String fileName, List<String> list) {
         if (null == list || list.isEmpty()) {
             System.err.println("文件[" + fileName + "]读取失败，无内容！");
             return;
         }
-        for(String str :list){
+        for (String str : list) {
             System.err.println(str);
             System.err.println(str.length());
             String batch = str.substring(20, 26);
-            System.err.println("batch(20, 26)--"+batch);
+            System.err.println("batch(20, 26)--" + batch);
             String newAccount = str.substring(89, 108);
-            System.err.println("newAccount(89, 108)--"+newAccount);
+            System.err.println("newAccount(89, 108)--" + newAccount);
             String flag = str.substring(108, 110);
-            System.err.println("flag(108, 110)--"+flag);
+            System.err.println("flag(108, 110)--" + flag);
             //String errorCode = str.substring(40, 43);
             //System.err.println("errorCode(40, 43)--"+errorCode);
         }
@@ -275,23 +282,19 @@ public class Text {
             System.err.println("文件[" + fileName + "]读取失败，无内容！");
             return;
         }
-        for(String str :list){
+        for (String str : list) {
             System.err.println(str);
             System.err.println(str.length());
             String idNo = str.substring(19, 37);
-            System.err.println("idNo(19, 37)--"+idNo);
+            System.err.println("idNo(19, 37)--" + idNo);
             String newAccount = str.substring(0, 19);
-            System.err.println("newAccount(0, 19)--"+newAccount);
+            System.err.println("newAccount(0, 19)--" + newAccount);
             String flag = str.substring(39, 40);
-            System.err.println("flag(39, 40)--"+flag);
+            System.err.println("flag(39, 40)--" + flag);
             String errorCode = str.substring(40, 43);
-            System.err.println("errorCode(40, 43)--"+errorCode);
+            System.err.println("errorCode(40, 43)--" + errorCode);
         }
     }
-
-
-
-
 
 
     public static void asciiToString() {// ASCII转换为字符串
