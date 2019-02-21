@@ -1,0 +1,61 @@
+
+
+
+consul  8500
+http://localhost:8500
+
+consul-consumer   8601
+http://localhost:8601/call
+http://localhost:8601/services
+http://localhost:8601/discover
+
+consul-consumer-feign	8611
+http://localhost:8611/helloFeign/neo
+
+consul-consumer-feign-hystrix  8621
+http://localhost:8621/helloFeign/neo
+http://localhost:8621/actuator/hystrix.stream
+
+consul-provider 8701
+http://localhost:8701/cloudApi/helloFeign?name=neo
+
+consul-provider2 8702
+http://localhost:8702/cloudApi/helloFeign?name=neo
+
+consul-gateway 9101
+http://localhost:9101/service-producer/cloudApi/hello/
+http://localhost:9101/service-consumer/call/
+http://localhost:9101/service-consumer/helloFeign/neo
+
+consul-hystrix-dashboard	9011
+http://localhost:9011/hystrix
+http://localhost:9011/actuator/hystrix.stream
+
+consul-hystrix-turbine		9021
+http://localhost:9021/turbine.stream
+
+http://localhost:9021/turbine.stream?cluster=service-consul-consumer-feign-hystrix
+http://localhost:9021/turbine.stream/clusters
+http://localhost:9021/hystrix.stream
+
+
+spring-cloud-monitor	9041
+
+consul-hystrix-turbine-stream 9031
+
+config-server-git   7101
+
+
+单体应用的监控：
+通过 URL：http://hystrix-app:port/hystrix.stream 开启 ，实现对具体某个服务实例的监控。
+（现在这里的 URL 应该为 http://hystrix-app:port/actuator/hystrix.stream，
+Actuator 2.x 以后  endpoints 全部在/actuator下，可以通过management.endpoints.web.base-path修改）
+
+
+server:
+  servlet:
+    context-path: /test            这是项目的访问路径
+    path: "*.action"       
+    以 .action结尾的请求路径  都可以进入                 
+    要在路径上加""   否则会报错
+原文：https://blog.csdn.net/qq_42526272/article/details/80875143
